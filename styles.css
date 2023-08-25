@@ -1,0 +1,271 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --clr-primary: rgb(54, 112, 199);
+    --clr-light: #f4f4f4;
+    --clr-dark: #333;
+    --clr-warning: rgb(161, 40, 40);
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Sedgwick Ave Display', cursive;
+    text-shadow: 4px 9px 11px rgba(0,0,0,0.6);
+}
+
+body {
+    font-family: "work sans", sans-serif;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+}
+
+.container {
+    display: grid;
+    place-items: center;
+    margin: 1rem;
+}
+
+@media only screen and (min-width: 800px) {
+    .container {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .title {
+        font-size: 5.2rem;
+        text-align: center;
+    }
+}
+
+.all-tasks {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    margin: 2rem 0;
+    border-top: 10px double #ff6550;
+    border-bottom: 10px double #ff6550;
+}
+
+.todo-list {
+    max-width: 80%;
+    box-shadow: 10px 13px 33px -3px rgba(0,0,0,0.75);
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkgray;
+    color: var(--clr-dark);
+    padding: 1em;
+    margin-top: 2em;
+}
+
+
+.task-list {
+    margin-top: 1rem;
+    margin-left: 1em;
+    line-height: 1.9;
+}
+
+.list-name {
+    cursor: pointer;
+}
+
+.active-list {
+    font-weight: 700;
+}
+
+.list-title {
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
+    padding: 1rem;
+    text-shadow: 4px 9px 11px rgba(0,0,0,0.3);
+}
+
+.task-count {
+    padding: 1rem;
+}
+
+@media only screen and (min-width: 800px) {
+    .list-title {
+        font-size: 2.5rem;
+    }
+
+    .todo-list {
+        max-width: 80%
+    }
+}
+
+.todo-body {
+    background-color: var(--clr-light);
+    color: var(--clr-dark);
+    padding: 2em;
+    position: relative;
+
+}
+
+.task {
+    position: relative;
+    margin-bottom: 1.25em;
+    font-family: 'Sedgwick Ave Display', cursive;
+}
+
+.task label {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.task::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -0.5em;
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.1;
+}
+
+.task label,
+.task input {
+    margin-bottom: 1em;
+}
+
+.new {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    font-size: inherit;
+    outline: none;
+    transition: border-bottom 150ms ease-in;
+    order: 2;
+}
+
+.new-task-creator {
+    margin-top: 1rem;
+}
+
+.new.task {
+    margin-bottom: 0;
+}
+
+.new-task-creator .create {
+    color: var(--clr-primary);
+}
+
+.new::placeholder {
+    color: inherit;
+    opacity: 0.4;
+}
+
+.new:focus {
+    border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+    opacity: 0.2;
+}
+
+form {
+    display: flex;
+}
+
+.btn {
+    cursor: pointer;
+    background: 0;
+    padding: 0;
+    color: inherit;
+    border: 0;
+}
+
+.btn.create {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-right: 0.25em;
+    transition: opacity 250ms ease-in;
+}
+
+.btn.create:hover {
+    opacity: 0.7;
+}
+
+[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.custom-checkbox {
+    --size: 0.75em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    cursor: pointer;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    margin-right: var(--size);
+    transform: scale(1);
+    transition: transform 300ms ease-in-out;
+}
+
+.task:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+    transform: scale(1.2);
+     color: var(--clr-primary);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+    background: var(--clr-primary);
+    border: var(--clr-primary);
+    box-shadow: inset 0 0 0px 3px white;
+}
+
+[type="checkbox"]:checked + label {
+    opacity: 0.5;
+}
+
+.task label::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 150ms ease-in-out;
+}
+
+[type="checkbox"]:checked + label::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.delete-stuff {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -35px;
+    color: var(--clr-light);
+    font-weight: 700;
+}
+
+.btn.delete {
+    opacity: 0.7;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+.btn.delete:hover {
+    color: var(--clr-warning);
+}
